@@ -1,3 +1,10 @@
+# 13. Adding a Shopping List Edit Section
+
+現在讓我們來處理 `shopping-edit` component 的模板：
+
+- [`shopping-edit.component.html`](../../course-project-1/src/app/shopping-list/shopping-edit/shopping-edit.component.html)
+
+```html
 <div class="row">
   <div class="col-xs-12">
     <form>
@@ -21,3 +28,4 @@
     </form>
   </div>
 </div>
+```
