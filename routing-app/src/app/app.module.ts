@@ -12,6 +12,7 @@ import { UserComponent } from './users/user/user.component';
 import { EditServerComponent } from './servers/edit-server/edit-server.component';
 import { ServerComponent } from './servers/server/server.component';
 import { ServersService } from './servers/servers.service';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent }, // localhost:4200
@@ -21,7 +22,9 @@ const appRoutes: Routes = [
   { path: 'servers', component: ServersComponent, children: [
     { path: ':id', component: ServerComponent }, // localhost:4200/servers/:id
     { path: ':id/edit', component: EditServerComponent }, // localhost:4200/servers/:id/edit
-  ] }
+  ] },
+  { path: 'not-found', component: PageNotFoundComponent }, // localhost:4200/not-found,
+  { path: '**', redirectTo: '/not-found' }
 ];
 
 @NgModule({
@@ -32,7 +35,8 @@ const appRoutes: Routes = [
     ServersComponent,
     UserComponent,
     EditServerComponent,
-    ServerComponent
+    ServerComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,
