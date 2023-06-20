@@ -2,13 +2,15 @@ import { Component, OnInit } from '@angular/core';
 
 import { ServersService } from '../servers.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ProtectedComponent } from 'src/app/protected-component';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-edit-server',
   templateUrl: './edit-server.component.html',
   styleUrls: ['./edit-server.component.css']
 })
-export class EditServerComponent implements OnInit {
+export class EditServerComponent implements OnInit, ProtectedComponent {
   server: {id: number, name: string, status: string};
   serverName = '';
   serverStatus = '';
@@ -42,4 +44,12 @@ export class EditServerComponent implements OnInit {
     this.router.navigate(['../'], {relativeTo: this.route});
   }
 
+  canDeactivate(): boolean | Promise<boolean> | Observable<boolean> {
+    if (!this.allowEdit) {
+      return true;
+    }
+    if ((this.serverName !== this.server.name || this.serverStatus !== this.server.status) || !this.changeSaved) {
+      return confirm('Do you want to discard the changes?');
+    }
+  }
 }
