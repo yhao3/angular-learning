@@ -69,6 +69,9 @@ const appRoutes: Routes = [
 export class AppRoutingModule { }
 ```
 
+> **Note**:
+> 這個 `message` 屬性是可以由我們隨意命名，我們也可以將這個 `{message: 'Page not found! (New)'}` **匿名**物件改為一個 `ErrorMessage` model 讓每個元件共用。
+
 如此一來我們就可以在 `ErrorPageComponent` 元件中注入 `ActivatedRoute` 服務來訂閱 `data` 屬性，藉此為 `errorMessage` 屬性賦值：
 
 - [`error-page.component.ts`](../../routing-app/src/app/error-page/error-page.component.ts)
