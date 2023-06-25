@@ -1,3 +1,8 @@
+# 02. Parametrizing Pipes
+
+- [`app.component.html`](../../pipes-app/src/app/app.component.html)
+
+```diff
 <div class="container">
   <div class="row">
     <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
@@ -12,9 +17,11 @@
           </span>
           <strong>{{ server.name }}</strong> |
           {{ server.instanceType | uppercase }} |
-          {{ server.started | date:'fullDate' }}
+-         {{ server.started | date }}
++         {{ server.started | date:'fullDate' }}
         </li>
       </ul>
     </div>
   </div>
 </div>
+```
