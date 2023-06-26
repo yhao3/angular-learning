@@ -28,7 +28,9 @@ export class PostsService {
 
   fetchPosts() {
     return this.http
-      .get<{ [key: string]: Post }>('https://ng-complete-guide-1b8d7-default-rtdb.asia-southeast1.firebasedatabase.app/posts.json')
+      .get<{ [key: string]: Post }>(
+        'https://ng-complete-guide-1b8d7-default-rtdb.asia-southeast1.firebasedatabase.app/posts.json'
+      )
       .pipe(
         map(responseData => {
           const postsArray = [];
