@@ -1,17 +1,16 @@
-import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs/operators';
-import { Post } from './post.model';
+# 07. Showing a Loading Indicator
 
+本小節將會實作載入指示器按鈕來增進使用者體驗。
 
-@Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
-})
+## Declaring the `isFetching` State
+
+- [`app.component.ts`](../../http-app/src/app/app.component.ts)
+
+```diff
+...
 export class AppComponent implements OnInit {
   loadedPosts: Post[] = [];
-  isFetching = false;
++ isFetching = false;
 
   constructor(private http: HttpClient) {}
 
@@ -40,7 +39,7 @@ export class AppComponent implements OnInit {
   }
 
   fetchPosts() {
-    this.isFetching = true;
++   this.isFetching = true;
     this.http
       .get<{ [key: string]: Post }>('https://ng-complete-guide-1b8d7-default-rtdb.asia-southeast1.firebasedatabase.app/posts.json')
       .pipe(
@@ -55,10 +54,35 @@ export class AppComponent implements OnInit {
         })
       )
       .subscribe(posts => {
-        this.isFetching = false;
++       this.isFetching = false;
         this.loadedPosts = posts;
       }
     );
   }
 
 }
+```
+
+## Using the `isFetching` State
+
+- [`app.component.html`](../../http-app/src/app/app.component.html)
+
+```diff
+<div class="container">
+  ...
+  <div class="row">
+    <div class="col-xs-12 col-md-6 col-md-offset-3">
+-     <p *ngIf="loadedPosts.length < 1">No posts available!</p>
++     <p *ngIf="loadedPosts.length < 1 && !isFetching">No posts available!</p>
+-     <ul class="list-group" *ngIf="loadedPosts.length >= 1">
++     <ul class="list-group" *ngIf="loadedPosts.length >= 1 && !isFetching">
+        <li class="list-group-item" *ngFor="let post of loadedPosts">
+          <h3>{{ post.title }}</h3>
+          <p>{{ post.content }}</p>
+        </li>
+      </ul>
++     <p *ngIf="isFetching">Loading...</p>
+    </div>
+  </div>
+</div>
+```
