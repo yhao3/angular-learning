@@ -4,6 +4,7 @@
       <form #postForm="ngForm" (ngSubmit)="onCreatePost(postForm.value)">
         <div class="form-group">
           <label for="title">Title</label>
+          <a style="cursor: pointer;" (click)="onLogout()">Sign out</a>
           <input
             type="text"
             class="form-control"

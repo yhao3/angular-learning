@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Post } from './post.model';
 import { PostsService } from './posts.service';
 import { Subscription } from 'rxjs';
+import { LoginService } from './login/login.service';
 
 
 @Component({
@@ -17,7 +18,8 @@ export class AppComponent implements OnInit, OnDestroy {
   private errorSub: Subscription;
 
   constructor(private http: HttpClient,
-              private postService: PostsService) {}
+              private postService: PostsService,
+              private loginService: LoginService) {}
 
   ngOnInit() {
 
@@ -30,8 +32,8 @@ export class AppComponent implements OnInit, OnDestroy {
     this.postService
       .fetchPosts()
       .subscribe(posts => {
-        this.isFetching = false;
-        this.loadedPosts = posts;
+        // this.isFetching = false;
+        // this.loadedPosts = posts;
       }, error => {
         this.error = error.message;
       });
@@ -48,8 +50,8 @@ export class AppComponent implements OnInit, OnDestroy {
     this.postService
       .fetchPosts()
       .subscribe(posts => {
-        this.isFetching = false;
-        this.loadedPosts = posts;
+        // this.isFetching = false;
+        // this.loadedPosts = posts;
       }, error => {
         this.error = error.message;
       });
@@ -66,4 +68,7 @@ export class AppComponent implements OnInit, OnDestroy {
     this.errorSub.unsubscribe();
   }
 
+  onLogout() {
+    this.loginService.logout();
+  }
 }

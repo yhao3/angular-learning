@@ -34,28 +34,35 @@ export class PostsService {
     searchParams = searchParams.append('print', 'pretty');
     searchParams = searchParams.append('custom', 'key');
     return this.http
-      .get<{ [key: string]: Post }>(
-        'https://ng-complete-guide-1b8d7-default-rtdb.asia-southeast1.firebasedatabase.app/posts.json',
-        {
-          headers: new HttpHeaders({ 'Custom-Header': 'Hello' }),
-          params: searchParams
-        }
+      .get(
+        'http://localhost:9000/api/account'
       )
-      .pipe(
-        map(responseData => {
-          const postsArray = [];
-          for (const key in responseData) {
-            if (responseData.hasOwnProperty(key)) {
-              postsArray.push({ ...responseData[key], id: key });
-            }
-          }
-          return postsArray;
-        }),
-        catchError(errorRes => {
-          // Send to analytics server...
-          return throwError(errorRes);
-        })
-      );
+    // let searchParams = new HttpParams();
+    // searchParams = searchParams.append('print', 'pretty');
+    // searchParams = searchParams.append('custom', 'key');
+    // return this.http
+    //   .get<{ [key: string]: Post }>(
+    //     'https://ng-complete-guide-1b8d7-default-rtdb.asia-southeast1.firebasedatabase.app/posts.json',
+    //     {
+    //       headers: new HttpHeaders({ 'Custom-Header': 'Hello' }),
+    //       params: searchParams
+    //     }
+    //   )
+    //   .pipe(
+    //     map(responseData => {
+    //       const postsArray = [];
+    //       for (const key in responseData) {
+    //         if (responseData.hasOwnProperty(key)) {
+    //           postsArray.push({ ...responseData[key], id: key });
+    //         }
+    //       }
+    //       return postsArray;
+    //     }),
+    //     catchError(errorRes => {
+    //       // Send to analytics server...
+    //       return throwError(errorRes);
+    //     })
+    //   );
   }
 
   deletePosts() {
